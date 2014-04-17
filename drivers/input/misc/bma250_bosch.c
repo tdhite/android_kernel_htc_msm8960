@@ -34,7 +34,9 @@
 #ifdef CONFIG_HAS_EARLYSUSPEND
 #include <linux/earlysuspend.h>
 #endif
+#if defined(CONFIG_CIR_ALWAYS_READY) || defined(CONFIG_SIG_MOTION) || defined(CONFIG_BMA250_WAKE_OPTIONS)
 #include <linux/wakelock.h>
+#endif
 
 #include <linux/bma250.h>
 #define D(x...) printk(KERN_DEBUG "[GSNR][BMA250_BOSCH] " x)

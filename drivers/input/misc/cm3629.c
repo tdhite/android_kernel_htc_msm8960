@@ -201,7 +201,7 @@ static int I2C_RxData_2(char *rxData, int length)
 
 		D("[PS][cm3629 warning] %s, i2c err, ISR gpio %d\n",
 				__func__, lpi->intr_pin);
-		msleep(10);
+		hr_msleep(10);
 	}
 
 	if (loop_i >= I2C_RETRY_COUNT) {
@@ -232,7 +232,7 @@ static int I2C_TxData(uint16_t slaveAddr, uint8_t *txData, int length)
 		D("[PS][cm3629 warning] %s, i2c err, slaveAddr 0x%x, register 0x%x, value 0x%x, ISR gpio%d, record_init_fail %d\n",
 				__func__, slaveAddr, txData[0], txData[1], lpi->intr_pin, record_init_fail);
 
-		msleep(10);
+		hr_msleep(10);
 	}
 
 	if (loop_i >= I2C_RETRY_COUNT) {
@@ -579,7 +579,7 @@ static void report_psensor_input_event(struct cm3629_info *lpi, int interrupt_fl
 	} else {
 		val = (interrupt_flag == 2) ? 0 : 1;
 	}
-    // @tbalden, adding here the old ps_near filling from pre Sense 5.5
+	// @tbalden, adding here the old ps_near filling from pre Sense 5.5
 	// for better near pocket detection
 	ps_near = !val;
 
@@ -1159,7 +1159,7 @@ static int psensor_enable(struct cm3629_info *lpi)
 	if (lpi->dynamical_threshold == 1 && lpi->mfg_mode != MFG_MODE &&
 		pocket_mode_flag != 1 && psensor_enable_by_touch != 1 ) {
 
-			msleep(40);
+			hr_msleep(40);
 			ret = get_stable_ps_adc_value(&ps_adc1, &ps_adc2);
 			while (index <= 10 && ps_adc1 == 0) {
 				D("[PS][cm3629]ps_adca = 0 retry");
@@ -2269,7 +2269,7 @@ static ssize_t ls_fLevel_store(struct device *dev,
 	input_sync(lpi->ls_input_dev);
 	printk(KERN_INFO "[LS]set fLevel = %d\n", f_cm3629_level);
 
-	msleep(1000);
+	hr_msleep(1000);
 	f_cm3629_level = -1;
 	return count;
 }
@@ -2613,9 +2613,9 @@ static int cm3629_read_chip_id(struct cm3629_info *lpi)
 	int ret = 0;
 
 	als_power(0);
-	msleep(5);
+	hr_msleep(5);
 	als_power(1);
-	msleep(5);
+	hr_msleep(5);
 
 	ret = _cm3629_I2C_Read2(lpi->cm3629_slave_address, CH_ID, chip_id, 2);
 	if (ret >= 0) {

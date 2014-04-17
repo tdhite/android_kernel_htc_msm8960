@@ -36,6 +36,8 @@ struct pm8xxx_vibrator_platform_data {
 
 int pm8xxx_vibrator_config(struct pm8xxx_vib_config *vib_config);
 
+#if defined(CONFIG_BMA250_WAKE_OPTIONS) || defined(CONFIG_TOUCHSCREEN_SYNAPTICS_SWEEP2WAKE)
 extern int vibrate(int time);
+#endif
 
 #endif /* __PMIC8XXX_VIBRATOR_H__ */

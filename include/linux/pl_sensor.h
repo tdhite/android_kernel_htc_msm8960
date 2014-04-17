@@ -8,4 +8,3 @@ extern int unregister_notifier_by_psensor(struct notifier_block *nb);
 int psensor_enable_by_touch_driver(int on);
 int power_key_check_in_pocket(int check_dark);
 #endif
-

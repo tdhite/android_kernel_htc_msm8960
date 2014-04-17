@@ -175,12 +175,13 @@ static void pm8xxx_vib_update(struct work_struct *work)
 	pm8xxx_vib_set(vib, vib->state);
 }
 
+#if defined(CONFIG_BMA250_WAKE_OPTIONS) || defined(CONFIG_TOUCHSCREEN_SYNAPTICS_SWEEP2WAKE)
 int vibrate(int time)
 {
     pm8xxx_vib_enable(&vib_dev->timed_dev, time);
     return 0;
 }
-
+#endif
 
 static int pm8xxx_vib_get_time(struct timed_output_dev *dev)
 {

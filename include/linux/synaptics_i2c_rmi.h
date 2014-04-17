@@ -185,7 +185,9 @@ enum {
 	FUNCTION
 };
 
+#if defined(CONFIG_BMA250_WAKE_OPTIONS) || defined (CONFIG_TOUCHSCREEN_SYNAPTICS_SWEEP2WAKE)
 extern uint8_t touchscreen_is_on(void);
+#endif
 
 #ifdef CONFIG_TOUCHSCREEN_SYNAPTICS_SWEEP2WAKE
 /* Sweep2Wake */
